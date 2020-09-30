@@ -1,0 +1,26 @@
+{
+  "name": "fe-interview-guidebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "dumi dev --port=8030",
+    "build": "dumi build",
+    "deploy": "bash ./deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weisuoke/fe-interview-guidebook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weisuoke/fe-interview-guidebook/issues"
+  },
+  "homepage": "https://github.com/weisuoke/fe-interview-guidebook#readme",
+  "devDependencies": {
+    "dumi": "^1.0.34",
+    "i": "^0.3.6"
+  }
+}
