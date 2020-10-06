@@ -6,7 +6,7 @@ group:
   title: 工具方法
   order: 3
 title: 防抖函数
-order: 1
+order: 2
 ---
 
 # 防抖函数的实现

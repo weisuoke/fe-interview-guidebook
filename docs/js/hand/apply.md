@@ -10,3 +10,5 @@ order: 5
 ---
 
 # 重写 apply
+
+详见 重写Call
