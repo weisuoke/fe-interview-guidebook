@@ -3,7 +3,7 @@ nav:
   title: JavaScript
   order: 1
 group:
-  title: 工具方法
+  title: 函数式编程
   order: 4
 title: 概述
 order: 1

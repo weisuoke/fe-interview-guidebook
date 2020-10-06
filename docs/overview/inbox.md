@@ -20,4 +20,6 @@ order: 2
 - [一些看起来很叼难的前端面试题](https://juejin.im/post/5f12509d6fb9a07e8f2ef04b?utm_source=gold_browser_extension)
 - [一次性解决Promise所有面试题](https://juejin.im/post/6868898917950423054?utm_source=gold_browser_extension)
 - [由浅入深，66条JavaScript面试知识点](https://mp.weixin.qq.com/s/gDFHkFUT5gCFy6XCU2Pbjw)
+- [18道 React 面试必考题含解答「面试高频」](https://mp.weixin.qq.com/s/IwUeiUlveC1BXy8Fqco1ug)
 
+- [手撕 32 个面试高频知识，轻松应对编程题](https://mp.weixin.qq.com/s/8RydWjb-zOeAJN2IrhLbNg)
