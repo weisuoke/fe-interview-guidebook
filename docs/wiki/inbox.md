@@ -24,3 +24,5 @@ order: 2
 
 - [手撕 32 个面试高频知识，轻松应对编程题](https://mp.weixin.qq.com/s/8RydWjb-zOeAJN2IrhLbNg)
 - [面试官：祖玛游戏玩过么？我来拷拷你~](https://mp.weixin.qq.com/s/VOXIu4YyBOMPCuwhorNbjg)
+- [前端算法渣的救赎之路🚀](https://juejin.im/post/5ed32e0151882542fd351696?utm_source=gold_browser_extension)
+

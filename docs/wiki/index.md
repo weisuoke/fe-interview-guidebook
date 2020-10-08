@@ -2,7 +2,7 @@
 nav:
   title: Wiki
   order: 99
-title: Overview
+title: Wiki
 order: 1
 ---
 
