@@ -21,7 +21,7 @@ order: 5
 2. 获取右边变量的显式原型（即： `prototype`）
 3. 进行比较`L.__proto__.__proto__.... === R.prototype`，相等则返回 `true`，否则返回`false`
 
-## 实现
+## 实现A
 
 ```js
 function instanceof2(left, right) {
@@ -36,6 +36,24 @@ function instanceof2(left, right) {
   }
   
   return false
+}
+```
+
+## 实现B
+
+```js
+function instanceOf(A, B) {
+  B = B.prototype;
+  A = A.__proto__;
+  while(true) {
+    if (A === null) {
+      return false
+    }
+    if (A === B) {
+      return true
+    }
+    A = A.__proto__
+  }
 }
 ```
 

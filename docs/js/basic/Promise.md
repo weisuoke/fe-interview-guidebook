@@ -19,7 +19,336 @@ order: 50
    - pending - 进行中
    - fulfilled - 已成功
    - rejected - 已失败
+2. 状态转换
+   - pending
+     - 转换至 fulfilled
+     - 转换至 rejected
+   - fulfilled
+     - 不能转换状态
+       - 必须有一个 value 值
+   - rejected
+     - 不能转换状态
+       - 必须有一个 reject 的 reason
+3. 总结
+   - 简言之：Promise 状态转换只能从 pending 转换至 fulfilled 或从 pending 转换至 rejected。转换成功则有其成功的 value 值，失败则有 reason 的值。
+
+### 1.2 必须提供 then 方法接收来访问最终结果
+
+`promise.then(onFulfilled, onRejected)`
+
+1. `onFulfilled`和`onRejected`是可选参数
+   - 如果 `onFulfilled` 不是一个函数，它必须被忽略
+   - 如果 `onRejected` 不是一个函数，它必须被忽略
+2. 如果 `onFulfilled` 是一个函数
+   - 在状态变为 fulfilled 被调用，且 promise 的值作为其第一个参数
+   - 状态不是 fulfilled 不能被调用
+   - 最多调用一次
+3. 如果 `onRejected` 是一个函数
+   - 在状态变为 rejected 被调用，且 promise 的值作为其第一个参数
+   - 状态不是 rejected 不能被调用
+   - 最多调用一次
+4. 在执行上下文栈只包含平台代码之前，`onFulfilled` 和 `onRejected` 则按照 then 的原始调用顺序执行
+5. `onFulfilled` 和 `onRejected` 必须被作为函数调用
+6. `then` 可以被调用多次
+   - 如果 promise 变为 fulfilled 状态，则所有的 `onFulfilled` 则按照 then 的原始调用顺序执行
+   - 如果 promise 变为 rejected 状态，则所有的 `onRejected` 则按照 then 的原始调用顺序执行
+7. `then` 必须返回一个 promise，`promise2 = promise1.then(onFulfilled, onRejected);`
+   - `onFulfilled` 或 `onRejected` 返回的结果为 `x`，调用`[[Resolve]](promise2, x)`
+   - `onFulfilled` 或 `onRejected` 抛出一个异常 `e`, promise 必须以 `e` 的理由失败
+   - 如果 `onFulfilled` 不是一个函数且状态为 `fulfilled`， 则 `promise2` 也应该是 fulfilled 状态且传递的 value 为 `promise1` 的 value
+   - 如果 `onRejected` 不是一个函数且状态为 `rejected`，则 `promise2` 也应该是 rejected 状态且传递的 reason 为 `promise1` 的 reason
+
+### 1.3 The Promise Resolution Procedure
+
+为了运行`[[Resolve]](promise, x)` 执行一下步骤
+
+1. 如果 promise 和 x 引用同一个对象，会报 `TypeError` 错误
+2. 如果 x 是一个 promise
+   - 如果 x 是 pending 状态，则会保持 pending 状态直到 fulfilled 状态或 rejected 状态
+   - 如果 x 是 fulfilled 状态，promise 也是 fulfilled 且传给该 value 值
+   - 如果 x 是 rejected 状态， promise 也是 rejected 且传给该 reason 值
+3. 如果 x 是一个对象或函数
+   - 让 then 成为 x.then
+   - 如果检索属性 x.then 抛出 e，则以 e 为原因拒绝 promise
+   - 如果 then 是一个函数，用 x 作为 this 调用它。第一个数是 `resolvePromise`，第二个是 `rejectPromise`
+     - 如果 `resolvePromise` 用一个值 y 调用，运行`[[Resolve]](promise, y)`
+     - 如果 `rejectPromise` 用一个原因 r 调用，用 r 拒绝 promise。
+     - 如果 `resolvePromise` 和 `rejectPromise` 都被调用，或者对同一个参数进行多次调用，那么第一次调用优先，以后的调用都会被忽略
+     - 如果调用 then 抛出异常
+       - 如果 `resolvePromise` 或 `rejectPromise` 已经被调用，则忽略
+       - 否则以 `e` 作为理由拒绝 promise
+   - 如果 then 不是一个函数，变为 fulfilled 状态并传值为 x
+4. 如果 x 不是一个对象或函数，状态变为 fulfilled 并传值 x
+
+![640](https://wsk-mweb.oss-cn-hangzhou.aliyuncs.com/ipic/2020-11-01-144059.jpg)
+
+> 下面就是基于Promise/A+规范实现的代码，已经经过promises-aplus-tests库进行了验证。
+
+## 2. Promise实现
+
+```js
+const PENDING = 'pending';
+const FULFILLED = 'fulfilled';
+const REJECTED = 'rejected';
+
+/**
+ * Promise 构造函数
+ * excutor: 内部同步执行的函数
+ */
+class Promise {
+  constructor(executor) {
+    const self = this;
+    self.status = PENDING;
+    self.onFulfilled = []; // 成功的回调
+    self.onRejected = [];
+    
+    // 异步处理成功调用的函数
+    // PromiseA+ 2.1 状态只能由Pending转为fulfilled或rejected；fulfilled状态必须有一个value值；rejected状态必须有一个reason值。
+    function resolve(value) {
+      if (self.status === PENDING) {
+        self.status = FULFILLED;
+        self.value = value;
+        // PromiseA+ 2.2.6.1 相同promise的then可以被调用多次，当promise变为fulfilled状态，全部的onFulfilled回调按照原始调用then的顺序执行
+        self.onFulfilled.forEach(fn => fn())
+      }
+    }
+    
+    function reject(reason) {
+      if(self.status === PENDING) {
+        self.status = REJECTED;
+        self.reason = reason;
+        // PromiseA+ 2.2.6.2 相同promise的then可以被调用多次，当promise变为rejected状态，全部的onRejected回调按照原始调用then的顺序执行
+        self.onRejected.forEach(fn => fn())
+      }
+    }
+    
+    try {
+      executor(resolve, reject)
+    } catch(e) {
+      reject(e)
+    }
+  }
+  
+  then(onFulfilled, onRejected) {
+    // PromiseA+ 2.2.1 onFulfilled和onRejected是可选参数
+    // PromiseA+ 2.2.5 onFulfilled和onRejected必须被作为函数调用
+    // PromiseA+ 2.2.7.3 如果onFulfilled不是函数且promise1状态是fulfilled，则promise2有相同的值且也是fulfilled状态
+    // PromiseA+ 2.2.7.4 如果onRejected不是函数且promise1状态是rejected，则promise2有相同的值且也是rejected状态
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
+    onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason };
+    
+    const self = this;
+    const promise = new Promise((resolve, reject) => {
+      const handle = (callback, handle) => {
+        // PromiseA+ 2.2.4 onFulfilled或者onRejected需要在自己的执行上下文栈里被调用，所以此处用setTimeout
+        setTimeout(() => {
+          try {
+            // PromiseA+ 2.2.2 如果onFulfilled是函数，则在fulfilled状态之后调用，第一个参数为value
+            // PromiseA+ 2.2.3 如果onRejected是函数，则在rejected状态之后调用，第一个参数为reason
+            const x = callback(data);
+            // PromiseA+ 2.2.7.1 如果onFulfilled或onRejected返回一个x值，运行这[[Resolve]](promise2, x)
+            resolvePromise(promise, x, resolve, reject);
+          } catch(e) {
+            // PromiseA+ 2.2.7.2 onFulfilled或onRejected抛出一个异常e，promise2必须以e的理由失败
+            reject(e);
+          }
+        })
+      }
+      if (self.status === PENDING) {
+        self.onFulfilled.push(() => {
+          handle(onFulfilled, self.value);
+        })
+        self.onRejected.push(() => {
+          handle(onRejected, self,reason);
+        })
+      } else if (self.status === FULFILLED) {
+        setTimeout(() => {
+          handle(onFulfulled, self.value);
+        })
+      } else if (self.status === REJECTED) {
+        setTimeout(() => {
+          handle(onRejected, self.reason)
+        })
+      }
+    })
+    
+    return promise;
+  }
+}
+
+function resolvePromise(promise, x, resolve, reject) {
+  // PromiseA+ 2.3.1 如果promise和x引用同一对象，会以TypeError错误reject promise
+  if (promise === x) {
+    reject(new TypeError('Chaining Cycle'));
+  }
+  
+  if (x && typeof x === 'object' || typeof x === 'function') {
+    // PromiseA+ 2.3.3.3.3 如果resolvePromise和rejectPromise都被调用，或者对同一个参数进行多次调用，那么第一次调用优先，以后的调用都会被忽略。
+    let used;
+    try {
+      // PromiseA+ 2.3.3.1 let then be x.then
+      // PromiseA+ 2.3.2 调用then方法已经包含了该条（该条是x是promise的处理）。
+      let then = x.then;
+      
+      if (typeof then === 'function') {
+        // PromiseA+ 2.3.3.3如果then是一个函数，用x作为this调用它。第一个参数是resolvePromise，第二个参数是rejectPromise
+        // PromiseA+ 2.3.3.3.1 如果resolvePromise用一个值y调用，运行[[Resolve]](promise, y)
+        // PromiseA+ 2.3.3.3.2 如果rejectPromise用一个原因r调用，用r拒绝promise。
+        then.call(x, (y) => {
+          if (used) return;
+          used = true;
+          resolvePromise(promise, y, resolve, reject)
+        }, (r) => {
+          if (used) return;
+          used = true;
+          reject(r)
+        })
+      } else {
+        // PromiseA+ 如果then不是一个函数，变为fulfilled状态并传值为x
+        if (used) return;
+        used = true;
+        resolve(x);
+      }
+    } catch(e) {
+      // PromiseA+ 2.3.3.2 如果检索属性x.then抛出异常e，则以e为原因拒绝promise
+      // PromiseA+ 2.3.3.4 如果调用then抛出异常，但是resolvePromise或rejectPromise已经执行，则忽略它
+      if (used) return;
+      used = true;
+      reject(e);
+    }
+  } else {
+    // PromiseA+ 2.3.4 如果x不是一个对象或函数，状态变为fulfilled并传值x
+    resolve(x)
+  }
+}
+```
+
+## 3. Promise.resolve()
+
+```js
+class Promise {
+  // ...
+  static resolve(value) {
+    // 如果参数是 Promise 实例，那么Promise.resolve将不做任何修改、原封不动地返回这个实例。
+    if (value instanceof Promise) return value;
+    
+    // 参数是一个thenable对象（具有then方法的对象）,Promise.resolve方法会将这个对象转为 Promise 对象，然后就立即执行thenable对象的then方法。
+    if (typeof value === 'object' || typeof value === 'function') {
+      try {
+        let then = value.then;
+        if (typeof then === 'function') {
+          return new Promise(then.bind(value))
+        }
+      } catch(e) {
+        return new Promise((resolve, reject) => {
+          reject(e)
+        })
+      }
+    }
+    
+    // 参数不是具有then方法的对象，或根本就不是对象,Promise.resolve方法返回一个新的 Promise 对象，状态为resolved。
+    return new Promise((resolve, reject) => {
+      resolve(value)
+    })
+  }
+}
+```
+
+## 4. Promise.reject()
+
+```js
+class Promise {
+  // ...
+  // 返回一个新的 Promise 实例，该实例的状态为rejected。
+  static reject(reason) {
+    return new Promise((resolve, reject) => {
+      reject(reason);
+    })
+  }
+}
+```
+
+## 5. Promise.all()
+
+```js
+class Promise {
+  // ...
+  // 用于将多个 Promise 实例，包装成一个新的 Promise 实例。只有所有状态都变为fulfilled，p的状态才会是fulfilled
+  static all(promises) {
+    const values = []
+    let resolvedCount = 0;
+    
+    return new Promise((resolve, reject) => {
+      promises.forEach((p, index) => {
+        Promise.resolve(p).then(value => {
+          resolvedCount++;
+          values[index] = value;
+          if (resolvedCount === promises.length) {
+            resolve(values)
+          }
+        }, reason => {
+          reject(reason)
+        })
+      })
+    })
+  }
+}
+```
+
+## 6. Promise.race()
+
+```js
+class Promise {
+  // ...
+  // 只要有一个实例率先改变状态，状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给回调函数。
+  static race(promises) {
+    return new Promise((resolve, reject) => {
+    	promises.forEach((p, index) => {
+        Promise.resolve(p).then(value => {
+          resolve(value);
+        }, reason => {
+          reject(reason);
+        })
+      })
+    })
+  }
+}
+```
+
+## 7.  Promise.catch()
+
+```js
+class Promise {
+  // ...
+  // 是.then(null, rejection)或.then(undefined, rejection)的别名，用于指定发生错误时的回调函数。
+  catch(onRejected) {
+    return this.then(undefined, onRejected);
+  }
+}
+```
+
+## 8. Promise.finally()
+
+```js
+class Promise {
+  // ...
+  // 用于指定不管 Promise 对象最后状态如何，都会执行的操作。
+  finally(callback) {
+    return this.then(
+    	value => Promise.resolve(callback()).then(() => value),
+      reason => Promise.resolve(callback()).then(() => throw reason)
+    )
+  }
+}
+```
 
 
 
-https://mp.weixin.qq.com/s/cHt-DBqY_YXOKiU_z4US2Q
+## 参考阅读
+
+- https://mp.weixin.qq.com/s/cHt-DBqY_YXOKiU_z4US2Q
+- [谷歌 JavaScript 技术面试（回调, Promise, Await/Async）](https://mp.weixin.qq.com/s/q0ufNt9s1ebhSSH0iMxySg)
+- [实现一个自己的Promise《一》](https://juejin.im/post/6890189360113975303?utm_source=gold_browser_extension)
+- [深入理解Promise](https://mp.weixin.qq.com/s/Hh-29eVWpPm2sw0F-H7UmQ)
+- [动图学JS异步: Promises & Async/Await](https://mp.weixin.qq.com/s/VmvpVB6g-EBJv7dqh2QouA)
+- [惊艳！可视化的 js：动态图演示 Promises & Async/Await 的过程！](https://mp.weixin.qq.com/s/anEdflYYh2Fc3RWQouH_ug)
