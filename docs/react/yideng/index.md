@@ -11,15 +11,15 @@ order: 1
 
 # 一灯React面试题汇总
 
-1. React组件通信方式
+1. [React组件通信方式](/react/yideng/001)
 2. 说一下react-fiber
-3. redux-saga和mobx比较
-4. React项目中有哪些细节可以优化？实际开发中都做过哪些性能优化？
-5. React事件绑定原理
-6. react最新版本解决了什么问题，加了哪些东西
-7. 如何实现双向绑定，并抽象成公共组件
+3. [redux-saga和mobx比较](/react/yideng/003)
+4. [React项目中有哪些细节可以优化？实际开发中都做过哪些性能优化？](/react/yideng/004)
+5. [React事件绑定原理](/react/yideng/005)
+6. [react最新版本解决了什么问题，加了哪些东西](/react/yideng/006)
+7. ~~如何实现双向绑定，并抽象成公共组件~~
 8. 按要求完成题目
-9. React兄弟组件的通信方式？
+9. [React兄弟组件的通信方式？](/react/yideng/009)
 10. Fiber算法原理，相比之前的stack算法哪些方面做了优化
 11. 为什么3大框架出现以后就出现很多native(RN)框架（虚拟DOM）
 12. props和state的区别
