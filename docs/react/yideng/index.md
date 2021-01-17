@@ -22,12 +22,12 @@ order: 1
 9. [React兄弟组件的通信方式？](/react/yideng/009)
 10. Fiber算法原理，相比之前的stack算法哪些方面做了优化
 11. 为什么3大框架出现以后就出现很多native(RN)框架（虚拟DOM）
-12. props和state的区别
-13. 对无状态组件的理解
+12. [props和state的区别](/react/yideng/012)
+13. [对无状态组件的理解](/react/yideng/013)
 14. RN如何实现一个原生的组件？
 15. RN的原理，为什么可以同时在安卓和IOS端运行
-16. redux和全局管理有什么区别
-17. 哪些方法会触发react重新渲染？重新渲染render会做些什么？
+16. [redux和全局管理有什么区别](/react/yideng/016)
+17. [哪些方法会触发react重新渲染？重新渲染render会做些什么？](/react/yideng/017)
 18. state和props触发更新的生命周期分别有什么区别？
 19. RN混原生和原生混RN有什么不同？
 20. React中setState后发生了什么？setState为什么默认是异步？setState什么时候是同步？
