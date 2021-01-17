@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/umi.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.2.22
+    </script>
+    <title>React 项目中有哪些细节可以优化？实际开发中都做过哪些性能优化</title>
+  
+</head>
+  <body>
+    <div id="root"><div class="__dumi-default-layout" data-show-sidemenu="true" data-show-slugs="true" data-site-mode="true" data-gapless="false"><div class="__dumi-default-navbar" data-mode="site"><button class="__dumi-default-navbar-toggle"></button><a class="__dumi-default-navbar-logo" href="/">前端面试手册</a><nav><div class="__dumi-default-search"><input type="search" class="__dumi-default-search-input" value=""/><ul></ul></div><a href="/js">JavaScript</a><a href="/css">CSS</a><a aria-current="page" class="active" href="/react">React</a><a href="/explorer">浏览器</a><a href="/network">网络</a><a href="/vue">Vue</a><a href="/webpack">Webpack</a><a href="/node">Node</a><a href="/gof">设计模式</a><a href="/algorithm">算法</a><a href="/skill">软技能</a><a href="/wiki">Wiki</a></nav></div><div class="__dumi-default-menu" data-mode="site"><div class="__dumi-default-menu-inner"><div class="__dumi-default-menu-header"><a class="__dumi-default-menu-logo" href="/"></a><h1>前端面试手册</h1><p>前端面试手册</p></div><div class="__dumi-default-menu-mobile-area"><ul class="__dumi-default-menu-nav-list"><li><a href="/js">JavaScript</a></li><li><a href="/css">CSS</a></li><li><a aria-current="page" class="active" href="/react">React</a></li><li><a href="/explorer">浏览器</a></li><li><a href="/network">网络</a></li><li><a href="/vue">Vue</a></li><li><a href="/webpack">Webpack</a></li><li><a href="/node">Node</a></li><li><a href="/gof">设计模式</a></li><li><a href="/algorithm">算法</a></li><li><a href="/skill">软技能</a></li><li><a href="/wiki">Wiki</a></li></ul></div><ul class="__dumi-default-menu-list"><li><a aria-current="page" class="active" href="/react">基础</a><ul><li><a href="/react"><span>概述</span></a></li></ul></li><li><a aria-current="page" class="active" href="/react/yideng">一灯学堂</a><ul><li><a href="/react/yideng"><span>React面试题</span></a></li><li><a href="/react/yideng/001"><span>React组件通信</span></a></li><li><a href="/react/yideng/003"><span>redux-saga 和 mobx 的比较</span></a></li><li><a aria-current="page" class="active" href="/react/yideng/004"><span>React 项目中有哪些细节可以优化？实际开发中都做过哪些性能优化</span></a></li><li><a href="/react/yideng/005"><span>React 事件绑定原理</span></a></li><li><a href="/react/yideng/006"><span>react 最新版本解决了什么问题 加了哪些东西</span></a></li><li><a href="/react/yideng/009"><span>React兄弟组件的通信方式？</span></a></li><li><a href="/react/yideng/012"><span>Props和State的区别</span></a></li><li><a href="/react/yideng/013"><span>对无状态组件的理解</span></a></li><li><a href="/react/yideng/016"><span>Redux 和全局管理有什么区别</span></a></li><li><a href="/react/yideng/017"><span>哪些方法会触发react重新渲染？重新渲染render会做些什么？</span></a></li></ul></li></ul></div></div><ul class="__dumi-default-layout-toc" role="slug-list"></ul><div class="__dumi-default-layout-content"><div class="markdown"><h1 id="react-项目中有哪些细节可以优化？实际开发中都做过哪些性能优化"><a aria-hidden="true" href="#react-项目中有哪些细节可以优化？实际开发中都做过哪些性能优化"><span class="icon icon-link"></span></a>React 项目中有哪些细节可以优化？实际开发中都做过哪些性能优化</h1><p>对于正常的项目优化，一般都涉及到几个方面，<strong>开发过程中</strong>、<strong>上线之后的首屏</strong>、<strong>运行过程的状态</strong></p><ul><li>来聊聊上线之后的首屏及运行状态：<ul><li>首屏优化一般涉及到几个指标FP、FCP、FMP；要有一个良好的体验是尽可能的把FCP提前，需要做一些工程化的处理，去优化资源的加载</li><li>方式及分包策略，资源的减少是最有效的加快首屏打开的方式；</li><li>对于CSR的应用，FCP的过程一般是首先加载js与css资源，js在本地执行完成，然后加载数据回来，做内容初始化渲染，这中间就有几次的网络反复请求的过程；所以CSR可以考虑使用骨架屏及预渲染（部分结构预渲染）、suspence与lazy做懒加载动态组件的方式</li><li>当然还有另外一种方式就是SSR的方式，SSR对于首屏的优化有一定的优势，但是这种瓶颈一般在Node服务端的处理，建议使用stream流的方式来处理，对于体验与node端的内存管理等，都有优势；</li><li>不管对于CSR或者SSR，都建议配合使用Service worker，来控制资源的调配及骨架屏秒开的体验</li><li>react项目上线之后，首先需要保障的是可用性，所以可以通过React.Profiler分析组件的渲染次数及耗时的一些任务，但是Profile记录的是commit阶段的数据，所以对于react的调和阶段就需要结合performance API一起分析；</li><li>由于React是父级props改变之后，所有与props不相关子组件在没有添加条件控制的情况之下，也会触发render渲染，这是没有必要的，可以结合React的PureComponent以及React.memo等做浅比较处理，这中间有涉及到不可变数据的处理，当然也可以结合使用ShouldComponentUpdate做深比较处理；</li><li>所有的运行状态优化，都是减少不必要的render，React.useMemo与React.useCallback也是可以做很多优化的地方；</li><li>在很多应用中，都会涉及到使用redux以及使用context，这两个都可能造成许多不必要的render，所以在使用的时候，也需要谨慎的处理一些数据；</li><li>最后就是保证整个应用的可用性，为组件创建错误边界，可以使用componentDidCatch来处理；</li></ul></li><li>实际项目中开发过程中还有很多其他的优化点：<ul><li>保证数据的不可变性</li><li>使用唯一的键值迭代</li><li>使用web worker做密集型的任务处理</li><li>不在render中处理数据</li><li>不必要的标签，使用React.Fragments</li></ul></li></ul></div><div class="__dumi-default-layout-footer-meta"><a target="_blank" rel="noopener noreferrer" href="https://github.com/weisuoke/fe-interview-guidebook/edit/master/docs/react/yideng/004.md">Edit this doc on GitHub<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="__dumi-default-external-link-icon"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a><span data-updated-text="Last Update: ">2021-1-17 8:14:34 ├F10: PM┤</span></div></div></div></div>
+	<script>
+  window.g_useSSR = true;
+  window.g_initialProps = {};
+	</script>
+
+    <script src="/umi.js"></script>
+    <script src="/docs__react__yideng__004.md.js"></script>
+  </body>
+</html>

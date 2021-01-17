@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/umi.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.2.22
+    </script>
+    <title>React兄弟组件的通信方式？</title>
+  
+</head>
+  <body>
+    <div id="root"><div class="__dumi-default-layout" data-show-sidemenu="true" data-show-slugs="true" data-site-mode="true" data-gapless="false"><div class="__dumi-default-navbar" data-mode="site"><button class="__dumi-default-navbar-toggle"></button><a class="__dumi-default-navbar-logo" href="/">前端面试手册</a><nav><div class="__dumi-default-search"><input type="search" class="__dumi-default-search-input" value=""/><ul></ul></div><a href="/js">JavaScript</a><a href="/css">CSS</a><a aria-current="page" class="active" href="/react">React</a><a href="/explorer">浏览器</a><a href="/network">网络</a><a href="/vue">Vue</a><a href="/webpack">Webpack</a><a href="/node">Node</a><a href="/gof">设计模式</a><a href="/algorithm">算法</a><a href="/skill">软技能</a><a href="/wiki">Wiki</a></nav></div><div class="__dumi-default-menu" data-mode="site"><div class="__dumi-default-menu-inner"><div class="__dumi-default-menu-header"><a class="__dumi-default-menu-logo" href="/"></a><h1>前端面试手册</h1><p>前端面试手册</p></div><div class="__dumi-default-menu-mobile-area"><ul class="__dumi-default-menu-nav-list"><li><a href="/js">JavaScript</a></li><li><a href="/css">CSS</a></li><li><a aria-current="page" class="active" href="/react">React</a></li><li><a href="/explorer">浏览器</a></li><li><a href="/network">网络</a></li><li><a href="/vue">Vue</a></li><li><a href="/webpack">Webpack</a></li><li><a href="/node">Node</a></li><li><a href="/gof">设计模式</a></li><li><a href="/algorithm">算法</a></li><li><a href="/skill">软技能</a></li><li><a href="/wiki">Wiki</a></li></ul></div><ul class="__dumi-default-menu-list"><li><a aria-current="page" class="active" href="/react">基础</a><ul><li><a href="/react"><span>概述</span></a></li></ul></li><li><a aria-current="page" class="active" href="/react/yideng">一灯学堂</a><ul><li><a href="/react/yideng"><span>React面试题</span></a></li><li><a href="/react/yideng/001"><span>React组件通信</span></a></li><li><a href="/react/yideng/003"><span>redux-saga 和 mobx 的比较</span></a></li><li><a href="/react/yideng/004"><span>React 项目中有哪些细节可以优化？实际开发中都做过哪些性能优化</span></a></li><li><a href="/react/yideng/005"><span>React 事件绑定原理</span></a></li><li><a href="/react/yideng/006"><span>react 最新版本解决了什么问题 加了哪些东西</span></a></li><li><a aria-current="page" class="active" href="/react/yideng/009"><span>React兄弟组件的通信方式？</span></a></li><li><a href="/react/yideng/012"><span>Props和State的区别</span></a></li><li><a href="/react/yideng/013"><span>对无状态组件的理解</span></a></li><li><a href="/react/yideng/016"><span>Redux 和全局管理有什么区别</span></a></li><li><a href="/react/yideng/017"><span>哪些方法会触发react重新渲染？重新渲染render会做些什么？</span></a></li></ul></li></ul></div></div><ul class="__dumi-default-layout-toc" role="slug-list"><li title="借助状态提升的方式间接实现通信" data-depth="2" class=""><a href="/react/yideng/009#借助状态提升的方式间接实现通信"><span>借助状态提升的方式间接实现通信</span></a></li><li title="利用自定义事件" data-depth="2" class=""><a href="/react/yideng/009#利用自定义事件"><span>利用自定义事件</span></a></li><li title="利用 context api" data-depth="2" class=""><a href="/react/yideng/009#利用-context-api"><span>利用 context api</span></a></li><li title="利用 redux/mobx等全局状态管理工具" data-depth="2" class=""><a href="/react/yideng/009#利用-reduxmobx等全局状态管理工具"><span>利用 redux/mobx等全局状态管理工具</span></a></li></ul><div class="__dumi-default-layout-content"><div class="markdown"><h1 id="react兄弟组件的通信方式？"><a aria-hidden="true" href="#react兄弟组件的通信方式？"><span class="icon icon-link"></span></a>React兄弟组件的通信方式？</h1><h2 id="借助状态提升的方式间接实现通信"><a aria-hidden="true" href="#借助状态提升的方式间接实现通信"><span class="icon icon-link"></span></a>借助状态提升的方式间接实现通信</h2><p>即把组件之间要共享的状态提升至最近的共同父组件中统管理。而任意一个兄弟组件可通过从父组件传来的回调函数更新共享状态，新的共享状态再通过父组件的 props 回传给子组件。</p><h2 id="利用自定义事件"><a aria-hidden="true" href="#利用自定义事件"><span class="icon icon-link"></span></a>利用自定义事件</h2><p>也就是典型的发布订阅模式，通过向事件对象上添加监听器和触发事件来实现组件之间的通信</p><h2 id="利用-context-api"><a aria-hidden="true" href="#利用-context-api"><span class="icon icon-link"></span></a>利用 context api</h2><p>Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法</p><h2 id="利用-reduxmobx等全局状态管理工具"><a aria-hidden="true" href="#利用-reduxmobx等全局状态管理工具"><span class="icon icon-link"></span></a>利用 redux/mobx等全局状态管理工具</h2></div><div class="__dumi-default-layout-footer-meta"><a target="_blank" rel="noopener noreferrer" href="https://github.com/weisuoke/fe-interview-guidebook/edit/master/docs/react/yideng/009.md">Edit this doc on GitHub<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="__dumi-default-external-link-icon"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a><span data-updated-text="Last Update: ">2021-1-17 8:14:34 ├F10: PM┤</span></div></div></div></div>
+	<script>
+  window.g_useSSR = true;
+  window.g_initialProps = {};
+	</script>
+
+    <script src="/umi.js"></script>
+    <script src="/docs__react__yideng__009.md.js"></script>
+  </body>
+</html>
