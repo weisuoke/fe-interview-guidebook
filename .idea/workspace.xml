@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac96bb05-298d-438a-8811-72f926f886d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/react/yideng/012.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/react/yideng/013.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/wiki/guide.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/wiki/zf-fe-basic.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/react/yideng/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/react/yideng/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist" beforeDir="false" afterPath="$PROJECT_DIR$/dist" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,7 @@
       <workItem from="1601457761153" duration="4689000" />
       <workItem from="1601467945613" duration="1715000" />
       <workItem from="1601472796612" duration="507000" />
-      <workItem from="1577836924797" duration="478000" />
+      <workItem from="1577836924797" duration="968000" />
     </task>
     <servers />
   </component>
