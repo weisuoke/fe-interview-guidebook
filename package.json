@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/weisuoke/fe-interview-guidebook#readme",
   "devDependencies": {
-    "dumi": "^1.0.34",
+    "dumi": "^1.1.23",
     "i": "^0.3.6"
   }
 }

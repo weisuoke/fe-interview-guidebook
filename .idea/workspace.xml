@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ac96bb05-298d-438a-8811-72f926f886d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/wiki/guide.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/wiki/zf-fe-basic.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/explorer/06.flow.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/vue/001.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist" beforeDir="false" afterPath="$PROJECT_DIR$/dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/vue/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/vue/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +19,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1iE163zdqdni0CMCBwKYkYE7PVo" />
   <component name="ProjectLevelVcsManager">
@@ -28,9 +36,16 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,6 +59,7 @@
       <workItem from="1601467945613" duration="1715000" />
       <workItem from="1601472796612" duration="507000" />
       <workItem from="1577836924797" duration="968000" />
+      <workItem from="1628562870524" duration="2436000" />
     </task>
     <servers />
   </component>
