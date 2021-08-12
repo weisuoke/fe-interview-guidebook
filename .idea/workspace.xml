@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac96bb05-298d-438a-8811-72f926f886d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/explorer/06.flow.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/vue/001.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/vue/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/vue/index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist" beforeDir="false" afterPath="$PROJECT_DIR$/dist" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +21,7 @@
     <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1iE163zdqdni0CMCBwKYkYE7PVo" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -60,6 +57,7 @@
       <workItem from="1601472796612" duration="507000" />
       <workItem from="1577836924797" duration="968000" />
       <workItem from="1628562870524" duration="2436000" />
+      <workItem from="1628682146226" duration="51000" />
     </task>
     <servers />
   </component>

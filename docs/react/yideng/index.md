@@ -30,7 +30,7 @@ order: 1
 17. [哪些方法会触发react重新渲染？重新渲染render会做些什么？](/react/yideng/017)
 18. state和props触发更新的生命周期分别有什么区别？
 19. RN混原生和原生混RN有什么不同？
-20. React中setState后发生了什么？setState为什么默认是异步？setState什么时候是同步？
+20. [React中setState后发生了什么？setState为什么默认是异步？setState什么时候是同步？](/react/yideng/020)
 21. React setState是同步还是异步？
 22. 对React的看法，它的优缺点，使用过程中遇到的问题，如何解决的。
 23. 介绍单页应用和多页应用
@@ -41,4 +41,7 @@ order: 1
 28. state是怎么注入到组件的，从reducer到组件经历了什么样的过程
 29. React遇到性能问题一般在哪个生命周期里解决。
 30. 多个组件之间如何拆分各自的state，每块小的组件有自己的状态，他们之间还有一些公共的状态需要维护，这如何思考。
+31. [Redux如何优化？](/react/yideng/031)
+32. [如何实现Redux异步功能？](/react/yideng/032)
+33. [说说React状态逻辑复用问题](/react/yideng/033)
 
