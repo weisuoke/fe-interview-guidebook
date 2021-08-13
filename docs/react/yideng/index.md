@@ -44,4 +44,6 @@ order: 1
 31. [Redux如何优化？](/react/yideng/031)
 32. [如何实现Redux异步功能？](/react/yideng/032)
 33. [说说React状态逻辑复用问题](/react/yideng/033)
+34. [React Hooks实现原理](/react/yideng/034)
+35. [React 事件绑定原理](/react/yideng/035)
 
