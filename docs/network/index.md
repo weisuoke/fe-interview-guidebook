@@ -14,5 +14,6 @@ order: 1
 - UDP
 - TCP
 - HTTPS
+- Websocket
 - ...
 
