@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac96bb05-298d-438a-8811-72f926f886d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/network/05.udp.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/network/06.tcp.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/react/yideng/010.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/react/yideng/035.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/react/yideng/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/react/yideng/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/react/1.basic/05.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/react/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/react/index.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
