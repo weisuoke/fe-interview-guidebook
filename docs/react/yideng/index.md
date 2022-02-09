@@ -20,7 +20,7 @@ order: 1
 7. ~~如何实现双向绑定，并抽象成公共组件~~
 8. 按要求完成题目
 9. [React兄弟组件的通信方式？](/react/yideng/009)
-10. Fiber算法原理，相比之前的stack算法哪些方面做了优化
+10. [Fiber算法原理，相比之前的stack算法哪些方面做了优化](/react/yideng/010)
 11. 为什么3大框架出现以后就出现很多native(RN)框架（虚拟DOM）
 12. [props和state的区别](/react/yideng/012)
 13. [对无状态组件的理解](/react/yideng/013)
@@ -45,5 +45,4 @@ order: 1
 32. [如何实现Redux异步功能？](/react/yideng/032)
 33. [说说React状态逻辑复用问题](/react/yideng/033)
 34. [React Hooks实现原理](/react/yideng/034)
-35. [React 事件绑定原理](/react/yideng/035)
 
