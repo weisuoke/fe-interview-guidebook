@@ -31,3 +31,9 @@ order: 1
 ### 1.4 Node
 
 - [node-interview-questions](https://github.com/jimuyouyou/node-interview-questions/)
+
+
+
+## 2 手册
+
+- [浏览器工作原理与实践](https://blog.poetries.top/browser-working-principle/)

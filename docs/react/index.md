@@ -26,6 +26,7 @@ order: 1
   - React的事件和普通的HTML事件有什么不同？
   - React中什么是合成事件？有什么用？
   - 请描述下React的事件机制？
+- HOC
 - fiber
 - 性能优化
 - 错误处理
