@@ -31,6 +31,10 @@ order: 1
 - 性能优化
 - 错误处理
 
+### Redux
+
+- Redux的原则
+
 ## 珠峰React面试题
 
 - [说一下你对React的理解](react/1.basic/01)
